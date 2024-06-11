@@ -13,10 +13,9 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      /* Fügen Sie das Hintergrundbild hinzu */
-      background-image: url('./Aws.webp'); /* Ersetzen Sie 'Pfad-zum-Bild.jpg' durch Ihren eigenen Bildpfad */
-      background-size: cover; /* Passen Sie die Bildgröße an, um die gesamte Fläche abzudecken */
-      background-position: center; /* Passen Sie die Position des Hintergrundbildes an */
+      background-image: url('./aws.jpg'); 
+      background-size: cover; 
+      background-position: center;
     }
 
     #overlay {
@@ -38,10 +37,55 @@
       z-index: 1;
     }
 
-    /* Modificare: Textul "APP AWS QUIZ PROJEKT" scris cu negru și font gros */
     #overlay h1 {
       color: black;
       font-weight: bold;
+    }
+
+    /* Styles für die Liste der Versuche */
+    .attempts-que {
+      position: absolute;
+      top: 20px; /* Position der Liste anpassen */
+      right: 20px; /* Position der Liste anpassen */
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+      max-width: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .attempts-que ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .attempts-que li {
+      background-color: #ddd;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      margin: 5px;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+
+    .attempts-que li.current {
+      background-color: #4CAF50;
+      color: #fff;
+    }
+
+    .attempts-que li:hover {
+      background-color: #bbb;
+      cursor: pointer;
     }
   </style>
 </head>

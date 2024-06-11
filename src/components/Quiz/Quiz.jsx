@@ -79,15 +79,21 @@ function Quiz() {
     setCurrentQuestion(shuffled[0]);
   };
 
+  const handleQuestionClick = (index) => {
+    setCurrentQuestion(index);
+    setShowAnswer(false);
+    setSelectedOption(null);
+  };
+
   const question = isRandomMode ? data[shuffledQuestions[currentQuestion]] : data[currentQuestion];
   const totalQuestions = data.length;
   const accuracy = (correctAnswers / totalQuestions) * 100;
 
   return (
     <div className="quiz-container">
-      
       <div className="quiz-content">
         <p className="question-number">Frage {currentQuestion + 1} von {totalQuestions}</p>
+        <p className="question-text">{question.question}</p> {/* Textul întrebării */}
         <div className="answer-buttons">
           <button
             onClick={() => handleOptionClick(1)}
@@ -121,9 +127,9 @@ function Quiz() {
         </div>
 
         <div className="answer-feedback-container">
-          <button onClick={handleShowAnswer} className="quiz-button">Antwort anzeigen</button>
-          <button onClick={handleFeedback} className="quiz-button">Feedback</button>
-          <button onClick={handleRandomQuestions} className="quiz-button">Random fragen</button>
+          <button onClick={handleShowAnswer} className="quiz-button">Antwort-Anzeigen</button>
+          <button onClick={handleFeedback} className="quiz-button">Feedback-Senden</button>
+          <button onClick={handleRandomQuestions} className="quiz-button">Random-Fragen</button>
         </div>
 
         {showAnswer && (
@@ -152,7 +158,7 @@ function Quiz() {
 
         {currentQuestion === data.length - 1 && (
           <button onClick={handleShowResult} className="show-result-button">
-            Ergebnis anzeigen
+            Ergebnis-Anzeigen
           </button>
         )}
 
@@ -168,12 +174,17 @@ function Quiz() {
             allowFullScreen
           ></iframe>
         </div>
-
       </div>
 
       <div className="dot-container">
-        {[...Array(25)].map((_, index) => (
-          <div key={index} className="dot"></div>
+        {[...Array(totalQuestions)].map((_, index) => (
+          <div
+            key={index}
+            className={`dot ${index === currentQuestion ? 'current' : ''}`}
+            onClick={() => handleQuestionClick(index)}
+          >
+            {index + 1}
+          </div>
         ))}
       </div>
 
@@ -185,35 +196,15 @@ function Quiz() {
 
       <div className="services-container">
         <ul className="services-list">
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>&#9733; <span
-className="red">Amazon EC2</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon S3</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon SNS</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Amazon SQS</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Speichern</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Datenverarbeitung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Bereitstellung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Management</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Überwachung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Integration</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Skalierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Sicherheit</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Analyse</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Optimierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Protokollierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Authentifizierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Autorisierung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Backup</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Wiederherstellung</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Migration</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Konnektivität</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">API</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Ausfallsicherheit</span></span></li>
-<li style={{ marginLeft: '10cm' }}><span className="red-bold" style={{ color: 'yellow' }}>★ <span className="red">Monitoring</span></span></li>
-</ul>
-</div>
-</div>
-);
+          <h2 className="red-bold"></h2>
+          <li style={{ color: 'white' }}></li>
+          {[].map((service, index) => (
+            <li key={index}>{service}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
 
 export default Quiz;
